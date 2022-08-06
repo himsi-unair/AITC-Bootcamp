@@ -22,7 +22,7 @@
           <img src="./assets/images/sample-img.png" class="margin-x-auto" id="image" alt="picture">
           <div class="wrap-input">
             <button class="btn btn-small btn-gray margin-x-auto" type="button">Pilih File</button>
-            <input type="file" id="fileImg" accept="image/png, image/jpg, image/jpeg" />
+            <input onchange="inputFile(this)" type="file" id="fileImg" accept="image/png, image/jpg, image/jpeg" />
           </div>
         </div>
         <input class="margin-b-16px" type="text" placeholder="nama mahasiswa"/>
@@ -35,5 +35,19 @@
   <footer>
     <p class="text-center">AITC Bootcamp</p>
   </footer>
+
+  <script>
+    function inputFile(value) {
+      const url = value.value;
+      if (value && value.files.length > 0) {
+        const img = document.getElementById('image');
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          img.setAttribute('src', e.target.result);
+        }
+        reader.readAsDataURL(value.files[0])
+      }
+    }
+  </script>
 </body>
 </html>
