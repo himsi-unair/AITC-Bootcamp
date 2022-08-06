@@ -17,7 +17,7 @@
   </header>
   <main>
     <div>
-      <input type="text" class="w-500px" placeholder="cari nama">
+      <input id="search" type="text" class="w-500px" placeholder="cari nama">
       <div id="empty" class="empty text-center d-none">
         <img src="./assets/images/empty.png" class="margin-x-auto" alt="empty image">
         <h4 class="font-medium">Hasil yang kamu cari tidak ditemukan</h4>
@@ -99,7 +99,11 @@
               Dolorum eaque qui quam recusandae quia, exercitationem culpa minus esse quis temporibus consequuntur earum expedita laboriosam. Ratione, dolorem!</p>
           </div>
         </article>
-        <article class="item">
+        <article class="item"
+          data-nama="Jonathan Higgins"
+          data-desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum accusantium omnis? Dolorum eaque qui quam recusandae quia, exercitationem culpa minus esse quis temporibus consequuntur earum expedita laboriosam. Ratione, dolorem!"
+          data-ipk="2.7"
+          data-src="./assets/images/profile-8.png">
           <div class="item-image">
             <img src="./assets/images/profile-8.png" alt="Jonathan Higgins">
             <span class="ipk">IPK 2.7</span>
@@ -137,5 +141,65 @@
   <footer>
     <p class="text-center">AITC Bootcamp</p>
   </footer>
+  <script>
+    // function testCallback(fungsi) {
+    //   fungsi();
+    // }
+    // testCallback(function(){
+    //   console.log('testCallback');
+    // });
+
+    function mounted() {
+      const search = document.getElementById("search");
+      const empty = document.getElementsByClassName("empty");
+      const itemsElem = document.getElementById("items");
+      const items = document.querySelectorAll("#items .item");
+
+      search.addEventListener("keyup", function() {
+        const arrItem = Array.from(items);
+        let count = 0;
+        arrItem.forEach(function(item, index) {
+          const name = item.querySelector(".item-desc h5").innerText;
+
+          if (name.toLowerCase().includes(search.value.toLowerCase())) {
+            item.classList.remove("d-none");
+          } else {
+            count += 1;
+            item.classList.add("d-none");
+          }
+        });
+        if (count === items.length) {
+          empty[0].classList.remove("d-none");
+          itemsElem.classList.add("d-none");
+        } else {
+          empty[0].classList.add("d-none");
+          itemsElem.classList.remove("d-none");
+        }
+      })
+    }
+    window.addEventListener("load", mounted);
+
+    fetch("https://jsonplaceholder.typicode.com/user")
+      .then(response => response.json())
+      .then(data => {
+        console.log("Janji Manis : ", data);
+      }).catch((error) => {
+        console.log(error);
+      });
+    
+    const promise = new Promise((resolve, reject) => {
+      if (false) {
+        resolve("Success!");
+      } else {
+        reject("Error!");
+      }
+    });
+
+    promise.then(result => {
+      console.log(result);
+    }).catch(error => {
+      console.log(error);
+    });
+  </script>
 </body>
 </html>
