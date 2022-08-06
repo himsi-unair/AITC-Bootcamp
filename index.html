@@ -17,8 +17,12 @@
   </header>
   <main>
     <div>
-      <input type="text" placeholder="cari nama">
-      <div class="items">
+      <input type="text" class="w-500px" placeholder="cari nama">
+      <div id="empty" class="empty text-center d-none">
+        <img src="./assets/images/empty.png" class="margin-x-auto" alt="empty image">
+        <h4 class="font-medium">Hasil yang kamu cari tidak ditemukan</h4>
+      </div>
+      <div id="items" class="items">
         <article class="item">
           <div class="item-image">
             <img src="./assets/images/profile-1.png" alt="B.A. Baracus">
@@ -106,6 +110,27 @@
               Dolorum eaque qui quam recusandae quia, exercitationem culpa minus esse quis temporibus consequuntur earum expedita laboriosam. Ratione, dolorem!</p>
           </div>
         </article>
+      </div>
+    </div>
+    <div id="modalDetail" class="modal d-none">
+      <div class="modal-content">
+        <div class="modal-body d-flex">
+          <div class="modal-image">
+            <img src="./assets/images/profile-1.png" alt="B.A. Baracus">
+          </div>
+          <div class="modal-desc">
+            <h3>B.A. Baracus</h3>
+            <span class="ipk">IPK 2.7</span>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="d-flex justify-between">
+            <button class="btn btn-secondary btn-link btn-large font-semibold">Edit</button>
+            <button class="btn btn-light btn-link btn-large">Hapus</button>
+          </div>
+        </div>
       </div>
     </div>
   </main>
