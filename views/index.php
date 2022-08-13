@@ -62,7 +62,7 @@
         <div class="modal-footer">
           <div class="d-flex justify-between">
             <a href="" class="btn btn-secondary btn-link btn-large font-semibold">Edit</a>
-            <form class="d-inline-block" method="POST" action="/index.html" onsubmit="if(!confirm('Apakah yakin dihapus?')) return false">
+            <form class="d-inline-block" method="POST" action="/hapus" onsubmit="if(!confirm('Apakah yakin dihapus?')) return false">
               <input type="hidden" value="DELETE" name="METHOD">
               <button class="btn btn-light btn-link btn-large" type="submit">Hapus</button>
             </form>
@@ -91,6 +91,7 @@
       const elemDesc = document.querySelector('#modalDetail .modal-body p');
       const elemImg = document.querySelector('#modalDetail .modal-image img');
       const elemBtnEdit = document.querySelector('#modalDetail .modal-footer a');
+      const elemFormDelete = document.querySelector('#modalDetail .modal-footer form');
 
       elemModal.classList.remove('d-none');
       elemName.innerText = e.getAttribute('data-name');
@@ -98,6 +99,7 @@
       elemDesc.innerText = e.getAttribute('data-desc');
       elemImg.setAttribute('src', e.getAttribute('data-src'));
       elemBtnEdit.setAttribute('href', 'edit?id=' + e.getAttribute('data-id'));
+      elemFormDelete.setAttribute('action', 'hapus?id=' + e.getAttribute('data-id'));
     }
 
     function mounted() {
