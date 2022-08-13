@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "nama": "B.A. Baracus",
+        "biodata": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum accusantium omnis?",
+        "image_url": ".\/assets\/images\/profile-1.png",
+        "ipk": 3.5
+    },
+    {
+        "id": 2,
+        "nama": "Theodore T.C. Calvin",
+        "biodata": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum accusantium omnis?",
+        "image_url": ".\/assets\/images\/profile-2.png",
+        "ipk": 3.2
+    },
+    {
+        "id": 3,
+        "nama": "Sledge Hammer",
+        "biodata": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum accusantium omnis?",
+        "image_url": ".\/assets\/images\/profile-3.png",
+        "ipk": 3.01
+    },
+    {
+        "id": 4,
+        "nama": "Peter Thornton",
+        "biodata": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum accusantium omnis?",
+        "image_url": ".\/assets\/images\/profile-4.png",
+        "ipk": 3.1
+    },
+    {
+        "id": 5,
+        "nama": "Lynn Tanner",
+        "biodata": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum accusantium omnis?",
+        "image_url": ".\/assets\/images\/profile-5.png",
+        "ipk": 2.9
+    },
+    {
+        "id": 6,
+        "nama": "April Curtis",
+        "biodata": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum accusantium omnis?",
+        "image_url": ".\/assets\/images\/profile-6.png",
+        "ipk": 3.32
+    },
+    {
+        "id": 7,
+        "nama": "Angela Bower",
+        "biodata": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum accusantium omnis?",
+        "image_url": ".\/assets\/images\/profile-7.png",
+        "ipk": 3.92
+    },
+    {
+        "id": 8,
+        "nama": "Jonathan Higgins",
+        "biodata": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum accusantium omnis?",
+        "image_url": ".\/assets\/images\/profile-8.png",
+        "ipk": 2.7
+    }
+]
