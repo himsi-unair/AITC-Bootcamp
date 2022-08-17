@@ -22,6 +22,10 @@ switch($route){
         $mahasiswa = new MahasiswaController;
         $mahasiswa->edit();
         break;
+    case '/update':
+        $mahasiswa = new MahasiswaController;
+        $mahasiswa->update();
+        break;
     default:
         echo "Halaman Tidak Ditemukan";
         break;

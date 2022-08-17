@@ -19,7 +19,7 @@
     <div>
       <form method="POST" action="/update" enctype="multipart/form-data" class="form w-500px margin-x-auto">
         <div class="input-image text-center">
-          <img src="<?php echo $data_mahasiswa->image_url?>" class="margin-x-auto" id="image" alt="picture">
+          <img src="<?php echo isset($_POST['image_url']) ? $_POST['image_url'] : $data_mahasiswa->image_url?>" class="margin-x-auto" id="image" alt="picture">
           <div class="wrap-input">
             <button class="btn btn-small btn-gray margin-x-auto" type="button">Pilih File</button>
             <input onchange="inputFile(this)" type="file" name="image" id="fileImg" accept="image/png, image/jpg, image/jpeg" />
@@ -28,7 +28,8 @@
         <?php if(isset($warning)):?>
         <p class="margin-b-16px" style="color:red"><?php echo $warning?></p>
         <?php endif?>
-        <input type="hidden" name="id" value="<?php echo $data_mahasiswa->id?>">
+        <input type="hidden" name="id" value="<?php echo isset($_POST['id']) ? $_POST['id'] : $data_mahasiswa->id?>">
+        <input type="hidden" name="image_url" value="<?php echo isset($_POST['image_url']) ? $_POST['image_url'] : $data_mahasiswa->image_url?>">
         <input class="margin-b-16px" type="text" name="nama" placeholder="nama mahasiswa" value="<?php echo isset($_POST['nama']) ? $_POST['nama'] : $data_mahasiswa->nama?>"/>
         <input class="margin-b-16px" type="number" step="0.01" max="4" min="0" name="ipk" placeholder="ipk" value="<?php echo isset($_POST['ipk']) ? $_POST['ipk'] : $data_mahasiswa->ipk?>"/>
         <textarea rows="8" type="text" placeholder="biodata" name="biodata"><?php echo isset($_POST['biodata']) ? $_POST['biodata'] : $data_mahasiswa->biodata?></textarea>
