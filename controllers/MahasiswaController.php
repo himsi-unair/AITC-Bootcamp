@@ -171,5 +171,25 @@
             header('Location: ' . 'http://' . $_SERVER['HTTP_HOST']);
             exit;
         }
+
+        public function destroy()
+        {
+            $id = $_GET['id'];
+
+            $kumpulan_mahasiswa = json_decode(file_get_contents('./data/mahasiswa.json'));
+            $delete = array_search($id, array_column($kumpulan_mahasiswa, 'id'));
+
+            if(empty($delete)){
+                $warning = 'Terjadi kesalahan : Data mahasiswa tidak ditemukan';
+                include './views/index.php';
+                exit;
+            }
+
+            array_splice($kumpulan_mahasiswa, $delete, 1);
+            file_put_contents('./data/mahasiswa.json', json_encode($kumpulan_mahasiswa, JSON_PRETTY_PRINT));
+
+            header('Location: ' . 'http://' . $_SERVER['HTTP_HOST']);
+            exit;
+        }
     }
 ?>

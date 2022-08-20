@@ -26,6 +26,10 @@ switch($route){
         $mahasiswa = new MahasiswaController;
         $mahasiswa->update();
         break;
+    case '/delete':
+        $mahasiswa = new MahasiswaController;
+        $mahasiswa->destroy();
+        break;
     default:
         echo "Halaman Tidak Ditemukan";
         break;
