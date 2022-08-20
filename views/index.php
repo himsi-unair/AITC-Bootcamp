@@ -26,24 +26,26 @@
         <h4 class="font-medium">Hasil yang kamu cari tidak ditemukan</h4>
       </div>
       <div id="items" class="items">
-        <?php foreach($kumpulan_mahasiswa as $mahasiswa):?>
-        <article class="item"
-          data-id="<?php echo $mahasiswa->id?>"
-          data-src="<?php echo $mahasiswa->image_url?>"
-          data-name="<?php echo $mahasiswa->nama?>"
-          data-desc="<?php echo $mahasiswa->biodata?>"
-          data-ipk="<?php echo $mahasiswa->ipk?>"
-          onclick="showModal(this)">
-          <div class="item-image">
-            <img src="<?php echo $mahasiswa->image_url?>" alt="<?php echo $mahasiswa->nama?>">
-            <span class="ipk">IPK <?php echo $mahasiswa->ipk?></span>
-          </div>
-          <div class="item-desc">
-            <h5><?php echo $mahasiswa->nama?></h5>
-            <p><?php echo $mahasiswa->biodata?></p>
-          </div>
-        </article>
-        <?php endforeach?>
+        <?php if($kumpulan_mahasiswa):?>
+          <?php foreach($kumpulan_mahasiswa as $mahasiswa):?>
+          <article class="item"
+            data-id="<?php echo $mahasiswa['id']?>"
+            data-src="<?php echo $mahasiswa['image_url']?>"
+            data-name="<?php echo $mahasiswa['nama']?>"
+            data-desc="<?php echo $mahasiswa['biodata']?>"
+            data-ipk="<?php echo $mahasiswa['ipk']?>"
+            onclick="showModal(this)">
+            <div class="item-image">
+              <img src="<?php echo $mahasiswa['image_url']?>" alt="<?php echo $mahasiswa['nama']?>">
+              <span class="ipk">IPK <?php echo $mahasiswa['ipk']?></span>
+            </div>
+            <div class="item-desc">
+              <h5><?php echo $mahasiswa['nama']?></h5>
+              <p><?php echo $mahasiswa['biodata']?></p>
+            </div>
+          </article>
+          <?php endforeach?>
+        <?php endif?>
       </div>
     </div>
     <div id="modalDetail" class="modal d-none">

@@ -1,10 +1,26 @@
 <?php
+    require_once './models/Mahasiswa.php';
 
     class MahasiswaController{
 
-        public function index()
+        public function seed()
         {
             $kumpulan_mahasiswa = json_decode(file_get_contents('./data/mahasiswa.json'));
+            foreach($kumpulan_mahasiswa as $data){
+                $mahasiswa = new Mahasiswa;
+                $mahasiswa->nama = $data->nama;
+                $mahasiswa->ipk = $data->ipk;
+                $mahasiswa->biodata = $data->biodata;
+                $mahasiswa->image_url = $data->image_url;
+                $save = $mahasiswa->create();
+            }
+            echo 'data successfully saved';
+        }
+
+        public function index()
+        {
+            $mahasiswa = new Mahasiswa;
+            $kumpulan_mahasiswa = $mahasiswa->get();
             include './views/index.php';
         }
 
@@ -33,6 +49,7 @@
                 exit;
             }
 
+            $file = null;
             if (!empty($_FILES['image']['tmp_name'])) {
                 $errors = [];
                 $path = './uploads/';
@@ -67,15 +84,18 @@
             }
 
             // simpan data
-            $data = (object) [
-                "nama" => $_POST['nama'],
-                "ipk" => $_POST['ipk'],
-                "biodata" => $_POST['biodata'],
-                "image_url" => $file
-            ];
-            $kumpulan_mahasiswa = json_decode(file_get_contents('./data/mahasiswa.json'));
-            array_push($kumpulan_mahasiswa, $data);
-            file_put_contents('./data/mahasiswa.json', json_encode($kumpulan_mahasiswa, JSON_PRETTY_PRINT));
+            $mahasiswa = new Mahasiswa;
+            $mahasiswa->nama = $_POST['nama'];
+            $mahasiswa->ipk = $_POST['ipk'];
+            $mahasiswa->biodata = $_POST['biodata'];
+            $mahasiswa->image_url = $file;
+            $save = $mahasiswa->create();
+
+            if(!$save){
+                $warning = 'Terjadi kesalahan : ' . $save->error_message;
+                include './views/create.php';
+                exit;
+            }
 
             // redirect ke menu awal
             header('Location: ' . 'http://' . $_SERVER['HTTP_HOST']);
@@ -85,18 +105,13 @@
         public function edit()
         {
             $id = $_GET['id'];
-            $kumpulan_mahasiswa = json_decode(file_get_contents('./data/mahasiswa.json'));
 
-            $data_mahasiswa = null;
-            foreach ($kumpulan_mahasiswa as $mahasiswa){
-                if($mahasiswa->id == $id){
-                    $data_mahasiswa = $mahasiswa;
-                }
-            }
+            $mahasiswa = new Mahasiswa;
+            $data_mahasiswa = $mahasiswa->get($id);
 
-            if($data_mahasiswa == null){
-                $warning = 'Terjadi kesalahan : Data mahasiswa tidak ditemukan';
-                include './views/index.php';
+            if(!$data_mahasiswa || empty($mahasiswa)){
+                // redirect ke menu awal
+                header('Location: ' . 'http://' . $_SERVER['HTTP_HOST']);
                 exit;
             }
 
@@ -119,7 +134,7 @@
                 exit;
             }
 
-            $file = null;
+            $file = $_POST['image_url'];
             if (!empty($_FILES['image']['tmp_name'])) {
                 $errors = [];
                 $path = './uploads/';
@@ -154,18 +169,27 @@
             }
 
             // simpan data
-            $kumpulan_mahasiswa = json_decode(file_get_contents('./data/mahasiswa.json'));
-            foreach ($kumpulan_mahasiswa as $mahasiswa){
-                if($mahasiswa->id == $_POST['id']){
-                    $mahasiswa->nama = $_POST['nama'];
-                    $mahasiswa->ipk = $_POST['ipk'];
-                    $mahasiswa->biodata = $_POST['biodata'];
-                    if($file != null){
-                        $mahasiswa->image_url = $file;
-                    }
-                }
+            $mahasiswa = new Mahasiswa;
+            $mahasiswa->nama = $_POST['nama'];
+            $mahasiswa->ipk = $_POST['ipk'];
+            $mahasiswa->biodata = $_POST['biodata'];
+            $mahasiswa->image_url = $file;
+            $update = $mahasiswa->update($_POST['id']);
+            if (!$update) {
+                $warning = 'Terjadi kesalahan : ' . $mahasiswa->error_message;
+                include './views/edit.php';
+                exit;
             }
-            file_put_contents('./data/mahasiswa.json', json_encode($kumpulan_mahasiswa, JSON_PRETTY_PRINT));
+
+            // redirect ke menu awal
+            header('Location: ' . 'http://' . $_SERVER['HTTP_HOST']);
+            exit;
+        }
+
+        public function destroy()
+        {
+            $mahasiswa = new Mahasiswa;
+            $delete = $mahasiswa->delete($_GET['id']);
 
             // redirect ke menu awal
             header('Location: ' . 'http://' . $_SERVER['HTTP_HOST']);
